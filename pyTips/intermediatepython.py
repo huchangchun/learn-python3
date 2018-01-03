@@ -24,9 +24,15 @@ def test_args_kwargs(arg1, arg2,arg3):
     print('arg2:',arg2)
     print('arg3:',arg3)
 args=("two",3,4)
-# test_args_kwargs(*args)
-# kwargs = {"arg3":3,"arg2":"two","arg1":5}
-# test_args_kwargs(**kwargs)
+test_args_kwargs(*args)
+kwargs = {"arg3":3,"arg2":"two","arg1":5}
+test_args_kwargs(**kwargs)
+# arg1: two
+# arg2: 3
+# arg3: 4
+# arg1: 5
+# arg2: two
+# arg3: 3
 def some_func(fargs,**kwargs):
     print("first normal args:",fargs)
     for key,value in kwargs.items():

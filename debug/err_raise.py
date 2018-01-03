@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+"""
+"""
+
 class FooError(ValueError):
     pass
 def foo(s):
