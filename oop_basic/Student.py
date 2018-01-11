@@ -33,3 +33,11 @@ print('Do not user Joe.__Student__name:',Joe._Student__name)
 # Joe.score 90
 # Joe grade：A
 # Do not user Joe.__Student__name: Joe
+
+def classobject():
+     num = 0
+    def __init__(self):
+    def get_name(self):
+        return self.__name
+    def get_num(self):
+        return num
