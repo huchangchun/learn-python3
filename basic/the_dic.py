@@ -9,3 +9,4 @@ print('d[\'Michael\']=',d['Michael'])
 print('d.get(\'Thomas\',-1)=',d.get('Thomas',-1))
 # d['Michael']= 95
 # d.get('Thomas',-1)= -1
+d.get(\'Bob\',-1)=')

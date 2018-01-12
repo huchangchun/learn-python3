@@ -25,7 +25,7 @@ open('文件名','打开的模式)
 '''
 写入文件
 '''
-files1=open('python.txt','r',encoding='utf-8')
+# files1=open('python.txt','r',encoding='utf-8')
 # str=files.read(5)
 # position=files.tell()
 # print(position)
@@ -40,11 +40,29 @@ files1=open('python.txt','r',encoding='utf-8')
 # content='\nloveyou'
 # # files.write(content)
 # files.close()
-file1=open('python.txt','r',encoding='utf-8')
-content =file1.read()
-files1.close()
-file2=open('python.txt','w+',encoding='utf-8')
-file2.write(content.replace("c++","python"))
-file2.seek(0)
-content = file2.read()
-print(content)
+# file1=open('python.txt','r',encoding='utf-8')
+# content =file1.read()
+# files1.close()
+# file2=open('python.txt','w+',encoding='utf-8')
+# file2.write(content.replace("c++","python"))
+# file2.seek(0)
+# content = file2.read()
+# print(content)
+def writefile(filepath):
+    try:
+        file =  open(filepath,'a+',encoding='utf-8')
+        while True:
+            content= input("输入：")
+            if content == '#':
+                break;
+            else:
+                file.write(content)
+    except:
+            file.close()
+    finally:
+        with open(filepath,'r') as fr:
+            content = fr.readlines()
+            print(content)
+if __name__=='__main__':
+    writefile('test.txt')
+
