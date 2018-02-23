@@ -95,15 +95,15 @@ y = x[:]
 # Python乘法口诀计算，编程练习题实例八
 # 简述：9*9乘法口诀表。 要求：逐项单位输出。例如1的一行，2的一行，以此类推。
 # 左下三角形
-for i in range(1,10):
-    for j in range(1,i+1):
-        print("%d*%d=%d"%(j,i,i*j),end=" ")
-    print()
+# for i in range(1,10):
+#     for j in range(1,i+1):
+#         print("%d*%d=%d"%(j,i,i*j),end=" ")
+#     print()
 # 左上三角形
-for i in range(1,10):
-    for j in range(i,10):
-        print("%d*%d=%d"%(j,i,i*j),end=" ")
-    print()
+# for i in range(1,10):
+#     for j in range(i,10):
+#         print("%d*%d=%d"%(j,i,i*j),end=" ")
+#     print()
 # Python判断素数，编程练习题实例九
 #质数（Prime number），又称素数，指在大于1的自然数中，
 # 除了1和该数自身外，无法被其他自然数整除的数
@@ -122,7 +122,7 @@ def isPrime(n):
         ret = True
     return ret
 for i in range(1,201):
-    isPrime(i)
+    # isPrime(i)
     pass
 # Python水仙花数for循环应用，编程练习题实例十三
 def shuixianhua(n):
@@ -133,4 +133,217 @@ def shuixianhua(n):
     if n == bai**3 +shi**3 + ge**3:
         print("%d is a shuixianshu"%n)
 for i in range(100,10000):
-    shuixianhua(i)
+    # shuixianhua(i)
+    pass
+# Python字母排序，编程练习题实例十四
+# 有两个磁盘文件A和B,各存放一行字母,要求把这两个文件中的信息合并(按字母顺序排列), 输出到一个新文件C中
+import string
+# fa = fb = None
+# with open("a.txt","r") as fr:
+#     fa = fr.read()
+#     fr.close()
+#
+# with open("b.txt","r") as fr:
+#     fb = fr.read()
+#     fr.close()
+#
+# lst = list(fa+fb)
+# lst.sort()
+# s = ""
+# s = s.join(lst)
+# with open("ab.txt",'w+',encoding='utf-8') as fw:
+#     fw.write(s)
+#     fw.close()
+# with open("ab.txt","r") as fr:
+#     content = fr.read()
+    # print("content:")
+    # print(content)
+    # fr.close()
+# Python　矩阵对角线，编程练习题实例十五
+#
+# a = []
+# sum = 0
+# for i in range(3):
+#     a.append([])
+#     for j in range(3):
+#         a[-1].append(float(input("num:\n")))
+# for i in range(3):
+#     sum += a[i][i]
+# print(sum)
+
+# Python　回推与递推，编程练习题实例十六
+# 题目：已知有五位朋友在一起。
+# 第五位朋友他说自己比第4个人大2岁；
+# 问第4个人岁数，他说比第3个人大2岁；
+# 问第三个人，又说比第2人大两岁；
+# 问第2个人，说比第一个人大两岁；
+# 最后问第一个人，他说是10岁
+# 求第5个人的年龄
+def getage(n):
+    if n == 1:
+        age = 10
+    else:
+        age = getage(n-1) + 2
+    return age
+# print("the %d age:%d" %(5,getage(5)))
+
+# Python　查找列表中出现最频繁的数，编程练习题实例十七
+# 题目：找到列表中出现最频繁的数，
+# 例如：test = [1,2,3,4,2,2,3,1,4,4,4]
+test = [1,2,3,4,2,2,3,1,4,4,4]
+a = {}
+for i in test:
+    if test.count(i) > 1:
+        a[i] = test.count(i)
+# print(a)
+
+# Python 阶乘计算，编程练习题实例十八
+# 题目：一行代码计算任何数的阶乘
+#阶乘的函数实现
+def functionjiecheng(n):
+    if n == 1:
+        return 1
+    else:
+        return n * functionjiecheng(n - 1)
+
+# print(functionjiecheng(4))
+#阶乘的一行代码实现
+from functools import reduce
+# print(reduce(lambda x,y:x*y,range(1,int(input("请输入一个数字打印其阶乘："))+1)))
+
+
+# Python 切片，编程练习题实例十九
+# 列举python列表的成员方法，并给出以下列表操作的答案：
+# (1) a=[1, 2, 3, 4, 5], a[::2]=?, a[-2:] = ?
+# (2) 一行代码实现对列表a中的偶数位置的元素进行加3后求和？
+# (3) 将列表a的元素顺序打乱，再对a进行排序得到列表b，然后把a和b按元素顺序构造一个字典d。
+a=[1, 2, 3, 4, 5]
+
+print(a[-2:])
+# [4, 5]
+print(a[::2])
+# [1, 3, 5]
+print(a[:2])
+# [1,2]
+# reduce(求和,偶数位加上后的列表)
+result = reduce(lambda x,y:x+y,[x +3  for x in a if ((a.index(x) + 1) % 2) == 0 ])
+# print("result:%d" % result)
+from random import shuffle
+shuffle(a)
+print(a)
+# [3, 1, 5, 2, 4]
+b = sorted(a,reverse=True)
+print(b)
+# [5, 4, 3, 2, 1]
+# zip 并行迭代，将两个序列“压缩”到一起，然后返回一个元组列表，最后，转化为字典类型。
+dic = dict(zip(a,b))
+# {3: 5, 1: 4, 5: 3, 2: 2, 4: 1}
+print(dic)
+z = zip(a,b)
+for i in z:
+    pass
+    # print("%d = %d" %(i[0],i[1]))
+    # 3 = 5
+    # 5 = 4
+    # 2 = 3
+    # 4 = 2
+    # 1 = 1
+
+
+#Python 内存管理，编程练习题实例二十
+'''
+ python 内存空间是以Python私有堆得形式进行管理。
+ 所有的python对象和数据结构都存放在一个私有堆中。
+ 解释器可以访问私有对，而程序员不可以
+ 将Python堆空间中的内存分配给Python对象的工作是由Python内存管理完成的。
+ 而内核API则会提供给程序员一些相关的工具来完成涉及到内存的编码工作
+ Python还内置垃圾回收器，从而进行回收释放内存到堆空间
+  
+'''
+#Python extendlist，编程练习题实例二十一
+# 以下代码的输出是什么？
+def extendList(val,list=[]):
+    list.append(val)
+    return list
+list1 = extendList(10)
+list2 = extendList(123,[])
+list3 = extendList('a')
+# 新的默认列表仅仅只在函数被定义时创建一次。
+# 随后当 extendList 没有被指定的列表参数调用的时候，其使用的是同一个列表
+# print("list01:%s" %list1)
+# list1 = [10, 'a']
+# print("list01:%s" %list2)
+# list2 = [123]
+# print("list01:%s" %list3)
+# list3 = [10, 'a']
+def extendList01(val,list = None):
+    if list == None:
+        list = []
+    else:
+        list.append(val)
+    return list
+
+list1 = extendList(10)
+list2 = extendList(123,[])
+list3 = extendList('a')
+# print("list01:%s" %list1)
+# list1 = [10]
+# print("list01:%s" %list2)
+# list2 = [123]
+# print("list01:%s" %list3)
+# list1 = ['a']
+
+#Python except，编程练习题实例二十二
+# 介绍一下except的用法和作用？
+# 答案：
+# try…except…except…[else…][finally…]
+# 执行try下的语句，如果引发异常，则执行过程会跳到except语句。对每个except分支顺序尝试执行，如果引发的异常与except中的异常组匹配，执行相应的语句。如果所有的except都不匹配，则异常会传递到下一个调用本代码的最高层try代码中。
+# try下的语句正常执行，则执行else块代码。如果发生异常，就不会执行
+# 如果存在finally语句，最后总是会执行。
+
+#Python 逆向打印，编程练习题实例二十三
+# 题目：raw_input获取给定的一个不多于5位的正整数。
+# 要求：
+# 一、求它是几位数；
+# 二、逆序打印出各位数字
+'''
+x = int(input("请输入一个数：\n"))
+12300
+a = x // 10000
+b = x % 10000 //1000
+c = x % 1000 //100
+d = x % 100 //10
+e = x % 10
+if a != 0:
+    print("5 位数 :%d%d%d%d%d"%(a,b,c,d,e))
+elif b != 0:
+    print("4 位数:%d%d%d%d"%(b, c, d, e))
+elif c != 0:
+    print("3 位数:%d%d%d"%(c, d, e))
+elif d != 0:
+    print("2 位数:%d%d"%(d,e))
+else:
+    print("1 位数:%d"%(e))
+'''
+#Python 算法，编程练习题实例二十三
+# 题目：365天，丈夫工作5天休息2天，妻子工作3天，休息1天。
+# 丈夫工作的第一天正好是妻子休息的第一天，请问两人一年内共同休息天数为多少?
+
+a = []
+b = []
+for i in range(392):
+    a.append(0)
+b = a[:]
+
+for i in range(0,392-7,7):
+    a[i+5] = 1
+    a[i+6] = 1
+for i in range(0,392-5,4):
+    b[i] = 1
+cout = 0
+for i in range(365):
+    if a[i] & b[i] == 1:
+        # print("%d:%d:%d"%(i,a[i],b[i]))
+        count += 1
+# print("Count:%d" %count)
+
