@@ -56,4 +56,5 @@ print('three days ago: %s ' %time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(tw
 times=time.time()
 formattime=time.localtime(times)
 print(formattime)
+
 print(time.strftime('今天是%Y年%m月%d日 %H点%M分%S秒',formattime)) #

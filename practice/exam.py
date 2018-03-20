@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-# print('mm333'.isalpha())
-# print([1,3,3].count(3))
+# print('mm333'.
 # dic ={"a":1,"b":2}
 # print(dic.get("c"))
 # print([1,3] in [1,2,3,4])
@@ -18,44 +17,58 @@ while d>=1:
         n = 2*(n+1)
     print('the %d day:last n:%d' % (d,n))
     d -= 1
-sum = 2*(n+1)
-print('sum:%d'%(sum))
+print('共:%d个'%(n))
+
+def fun01(day):
+    if day == 6:
+        sum =1
+    else:
+        sum = 2*(fun01(day + 1) +1)
+    return sum
+print("共买了:%d个士力架"%fun01(1))
 # the 6 day:last n:1
 # the 5 day:last n:4
 # the 4 day:last n:10
 # the 3 day:last n:22
 # the 2 day:last n:46
 # the 1 day:last n:94
-# sum:190
+# 共:94个
 
-#一次性输入任意不少于5个数字（数字以逗号未分界）保存在列表中并且对输入的数字进行排序
+
+#一次性输入任意不少于5个数字（数字以逗号分界）保存在列表中并且对输入的数字进行排序
 # 封装成函数
 def sortlist(list):
-    for i in range(len(list)):
-        for j in range(i):
-            if list[j] > list[j+1]:
-                list[j],list[j+1] = list[j+1],list[j]
+    listlen =len(list)
+    for i in range(listlen):
+        for j in range(i + 1, listlen):
+            if list[j] < list[i]:
+                list[i], list[j] = list[j], list[i]
+# 1,2,3,2,2,2,12,321,12,23,31,1231
+str = input("输入不少于5个数:")
+list01 = str.split(',')
+newlist=[]
+for i in range(len(list01)):
+    newlist.append(int(list01[i]))
+print(newlist)
+sortlist(newlist)
+print(newlist)
 
-# str = input("输入5个数:")
-# list = str.split(',')
-# sortlist(list)
-# print(list)
-# 输入5个数:1,4,3,2,7
-# ['1', '2', '3', '4', '7']
+# 输入不少于5个数:1,4,3,2,7,8
+# ['1', '2', '3', '4', '7','8']
 
 #写一个程序，可任意输入一个文件名打开该文件，如果文件不存在则创建
 #然后开始写入内容，可重复输入追加到文件中，若写入失败则退出程序
 # 当输入#时结束输入，并打印文件的所有内容，将程序封装成函数
 def writefile():
+    filename = input("输入一个文件名：")
     try:
-        filename = input("输入一个文件名：")
         with open(filename,'a+') as fw:
             while True:
                 content = input('输入')
                 if content == '#':
                     break;
                 fw.write(content)
-    except Exception :
+    except BaseException :
         return
     with open(filename,'r') as fr:
         content = fr.read()
@@ -110,7 +123,7 @@ def group_list(list):
     new_lst[-1].append(list[i])
     return new_lst
 nlst = group_list(lst)
-# print(nlst)
+print(nlst)
 
 """
 将
@@ -143,5 +156,11 @@ def group_listtwo(list):
         new_lst.append(list[i+1])
     return new_lst
 nlst = group_listtwo(lst)
-# print(nlst)
+print(nlst)
 
+
+def fun01(a, *tup_args, **dict_args):
+    print(a)
+    print(tup_args)
+    print(dict_args)
+fun01("a1", "a2", name='joe', age=18)

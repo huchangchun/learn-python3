@@ -27,3 +27,4 @@ b = str.encode('utf-8')
 print(b)
 #bytes 转str
 print(b.decode('utf-8'))
+

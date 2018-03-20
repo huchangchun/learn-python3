@@ -28,79 +28,84 @@
         查看个人详细信息（需要卡号密码验证）
             返回个人的卡号，用户名，余额信息
 """
-class Bank():
-    #一个属于银行的类属性
-    __Users = {}
-    #每个对象用于卡号，密码，用户名，余额
-    def __init__(self,CardId,pwd,name,balance):
-        if CardId not in Bank.__Users:
-            Bank.__Users[CardId] =  {'pwd':pwd,'Username':name,'Balance':balance}
-            self.__CardId = CardId
-            self.__pwd = pwd
-            self.__name = name
-            self.__balance = balance
-    #查看本银行的开户数
-    @classmethod
-    def nums(cls):
-        print('当前用户数%d' %(len(cls.__Users)))
 
-    #查看所有用户的个人信息（含卡号，密码用户名，余额）
+class Bank:
+    #定义类属性
+    __Users={}
+    def __init__(self,CardId,Pwd,UserName,Balance):
+        if CardId not in Bank.__Users:
+            Bank.__Users[CardId] = {"Pwd": Pwd, "UserName": UserName, "Balance": Balance}
+            self.__CardId = CardId
+            self.__UserName = UserName
+            self.__Pwd = Pwd
+            self.__Balance = Balance
+    #定义类方法：查看用户总数
     @classmethod
-    def get_Users(cls):
-        for key ,val in cls.__Users.items():
-            print('卡号：%s \n用户名：%s \n密码：%d \n余额：%d'%(key,val['Username'],val['pwd'],val['Balance']))
-            print()
-    #验证方法
+    def checkUserNumber(cls):
+        print("当前储蓄用户数： %d" %(len(Bank.__Users)))
+
+    #定义类方法：查看用户信息
+    @classmethod
+    def getInfo(cls):
+        for user,value in Bank.__Users.items():
+            print("卡号：%s 密码：%s 用户名：%s 余额：%d\n" %(user,value["Pwd"],value["UserName"],value["Balance"]))
+    #定义静态方法访问类属性
     @staticmethod
-    def check_User(CardId,pwd):
-        if(CardId in Bank.__Users) and (pwd == Bank.__Users[CardId]['pwd']):
+    def checkUser(cardId,pwd):
+        if Bank.__Users[cardId]["Pwd"] == pwd:
             return True
         else:
             return False
-    #验证金额
+
     @staticmethod
-    def check_money(money):
+    def checkMoney(money):
         if isinstance(money,int):
             return True
         else:
+            False
+
+    #定义实例方法：取钱
+    def withdraw(self,cardId,pwd,money):
+        if Bank.checkUser(cardId,pwd):
+            if Bank.checkMoney(money):
+                if Bank.__Users[cardId]["Balance"] > money:
+                    print("开始取钱:%d" %money)
+                    Bank.__Users[cardId]["Balance"] -= money
+                else:
+                    print("您的余额不足")
+            else:
+                print("您输入的金额有误！")
+        else:
+            print("密码错误")
+    #定义实例方法：存钱
+    def deposit(self,cardId,pwd,money):
+        if Bank.checkUser(cardId,pwd):
+            print("开始存钱：%d" %money)
+            Bank.__Users[cardId]["Balance"] += money
+            return True
+        else:
+            print("密码错误")
             return False
-    #取钱
-    def withdraw(self, CardId,pwd,money):
-        if Bank.check_User(CardId,pwd):
-            #开始取钱
-            if Bank.__Users[CardId]['Balance'] >=money:
-                Bank.__Users[CardId]['Balance'] -= money
-                print('当前卡号%s,当前取款金额%d,当前余额%d'%(CardId,money,Bank.__Users[CardId]['Balance']))
-            else:
-                print('余额不足')
+    #定义实例方法：查看余额
+    def getUserBalance(self,cardId,pwd):
+        if Bank.checkUser(cardId,pwd):
+            print("卡号：%s 用户名：%s 余额：%d" %(cardId,Bank.__Users[cardId]["UserName"],Bank.__Users[cardId]["Balance"]))
         else:
-            print('您输入的金额有误')
-    #存钱
-    def repository(self,CardId,pwd,money):
-        if Bank.check_User(CardId, pwd):
-            if Bank.check_money(money):
-                Bank.__Users[CardId]['Balance'] += money
-                print('当前卡号%s,当前存款金额%d,当前余额%d' % (CardId, money, Bank.__Users[CardId]['Balance']))
-            else:
-                print('您输入的金额有误')
-        else:
-            print('卡号或者密码有误')
-    #查看个人详细信息(需要卡号密码验证）
-    def getInfo(self,CardId,pwd):
-        if Bank.check_User(CardId,pwd):
-            print('当前卡号%s,当前用户名%s,当前余额%d' % (CardId, Bank.__Users[CardId]['Username'], Bank.__Users[CardId]['Balance']))
-        else:
-            print('卡号或者密码有误')
-joe = Bank('1001',111111,'joe',100)
-Tom = Bank('1001',111111,'joe',100)
-Bank.nums()
-print('_'*50)
-Bank.get_Users()
-joe.withdraw('1001',111111,500)
-print('_'*50)
-joe.repository('1001',111111,300)
-print('_'*50)
-joe.getInfo('1001',111111)
+            print("密码错误")
+Joe = Bank("612321325643","123456","joe",10000)
+Jack = Bank("61232132564","234567","Jack",20000)
+
+Bank.checkUserNumber()
+Bank.getInfo()
+Joe.getUserBalance("612321325643","123456")
+Jack.getUserBalance("61232132564","234567")
+Joe.deposit("612321325643","123456",8000)
+Joe.getUserBalance("612321325643","123456")
+Joe.deposit("612321325643","123456",4000)
+Joe.getUserBalance("612321325643","123456")
+Joe.withdraw("612321325643","123456",8000)
+Joe.getUserBalance("612321325643","123456")
+
 
 # 当前用户数1
 # __________________________________________________
