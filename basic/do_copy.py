@@ -105,3 +105,30 @@ print(list_d)
 # 思路二：利用copy中的deepcopy方法进行拷贝就叫做深拷贝，外围和内部元素都进行了拷贝对象本身，而不是引用。
 #     但是对于数字，字符串和元组类型对象，没有被拷贝的说法，即便是用深拷贝，查看id的话也是一样的，如果对其重新赋值，
 # 也只是新创建一个对象，替换掉旧的而已
+
+a = [1,2,3, [3,4,5]]
+b = a[:]
+print(b)
+#[1, 2, 3, [3, 4, 5]]
+a[3].append(6)
+print(a)
+#[1, 2, 3, [3, 4, 5, 6]]
+print(b)
+#[1, 2, 3, [3, 4, 5, 6]]
+#切片只拷贝了最外围的对象
+
+ 
+def my_deepcopy(arr):
+    rt = []
+    for item in arr:
+        if isinstance(item,list):
+            rt.append(my_deepcopy(item))
+        else:
+            rt.append(item)
+    return rt
+if __name__ == '__main__':
+    a =  [1,2,3, [3,4,5]]
+    b = my_deepcopy(a)
+    b[3][2] = 'test'
+    print(a)
+    print(b)
