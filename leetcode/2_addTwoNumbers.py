@@ -8,6 +8,9 @@ Example:
 Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
 Explanation: 342 + 465 = 807.
+Input: (2 -> 4 -> 6 ->2) + (5 -> 6 -> 4)
+Output: 7 -> 0 -> 2 ->3
+Explanation: 3462 + 465 = 7023.
 """
 #encoding=utf-8
 # Definition for singly-linked list.
