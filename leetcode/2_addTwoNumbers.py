@@ -24,21 +24,21 @@ class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
         root = None
         tempNode = None
-        nextplus = 0
+        carry = 0
         val = 0
         def createNewNode(value):
-            plus = 0
+            carry = 0
             if value < 10:
                 value = value
             else:
-                plus = value // 10
+                carry = value // 10
                 value = value % 10
-            return ListNode(value),plus               
+            return ListNode(value),carry               
         while l1 is not None and l2 is not None:
-            val =  l1.val + l2.val + nextplus
+            val =  l1.val + l2.val + carry
             l1 = l1.next
             l2 = l2.next 
-            newNode,nextplus = createNewNode(val)
+            newNode,carry = createNewNode(val)
             if root is None:
                 root = tempNode = newNode
             else:
@@ -46,13 +46,13 @@ class Solution:
                 tempNode = newNode
         l3 = l1 if l1 is not None else l2 if l2 is not None else None
         while l3 is not None:
-            val = l3.val + nextplus
+            val = l3.val + carry
             l3 = l3.next
-            newNode,nextplus = createNewNode(val)
+            newNode,carry = createNewNode(val)
             tempNode.next = newNode
             tempNode = newNode
-        if nextplus != 0:
-            tempNode.next = ListNode(nextplus)
+        if carry != 0:
+            tempNode.next = ListNode(carry)
             tempNode = newNode            
         return root
               
