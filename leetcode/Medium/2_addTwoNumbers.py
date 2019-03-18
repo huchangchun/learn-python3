@@ -21,44 +21,49 @@ class ListNode:
 
 class Solution:
      
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    #124 ms 
+    def addTwoNumbers1(self, l1: ListNode, l2: ListNode) -> ListNode:
         root = None
         tempNode = None
         carry = 0
         val = 0
-        def createNewNode(value):
-            carry = 0
-            if value < 10:
-                value = value
-            else:
-                carry = value // 10
-                value = value % 10
-            return ListNode(value),carry               
-        while l1 is not None and l2 is not None:
+           
+        while l1  and l2  :
             val =  l1.val + l2.val + carry
             l1 = l1.next
             l2 = l2.next 
-            newNode,carry = createNewNode(val)
+            carry = val // 10 
             if root is None:
-                root = tempNode = newNode
+                root = tempNode = ListNode(val % 10)
             else:
-                tempNode.next = newNode
-                tempNode = newNode
-        l3 = l1 if l1 is not None else l2 if l2 is not None else None
-        while l3 is not None:
+                tempNode.next = ListNode(val % 10)
+                tempNode =  tempNode.next
+        l3 = l1 or l2
+        while l3 :
             val = l3.val + carry
             l3 = l3.next
-            newNode,carry = createNewNode(val)
-            tempNode.next = newNode
-            tempNode = newNode
+            carry = val // 10
+            tempNode.next = ListNode(val % 10)
+            tempNode = tempNode.next
         if carry != 0:
             tempNode.next = ListNode(carry)
-            tempNode = newNode            
+                   
         return root
               
- 
+    #shoter version 108ms
+    def addTwoNumbers(self, l1: ListNode, l2 : ListNode) -> ListNode:
+        p = dummy = ListNode(-1)
+        carry = 0 
+        while l1 or l2 or carry:
+            val = (l1 and l1.val or 0) + (l2 and l2.val or 0) + carry
+            carry  = val // 10
+            p.next = ListNode(val % 10)
+            l1 = l1 and l1.next
+            l2 = l2 and l2.next
+            p = p.next
+        return dummy.next
     def printPreNode(self,  l1: ListNode) -> ListNode:
-        if l1.next is not None:
+        if l1.next:
             print(l1.val,"-> ",end="")  
         else:
             print(l1.val)  
@@ -66,7 +71,7 @@ class Solution:
         l1 = l1.next
         self.printPreNode(l1)        
     def printPostNode(self, l1: ListNode) -> ListNode:
-        if l1.next is  None:
+        if l1.next:
             print(l1.val,end=" ")
             return 
         else:
