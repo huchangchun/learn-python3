@@ -42,9 +42,56 @@ Input: 1994
 Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 """
+
 class Solution:
-     
-    def intToRoman(self, x: int) -> str:
+    #Runtime: 136 ms
+    def intToRoman(self, num: 'int') -> 'str':
+        result = ""
+        if num < 1 or num > 3999:
+            return result
+        while num >= 1000:
+            result += "M"
+            num -= 1000
+        if num >= 900:
+            result += "CM"
+            num -= 900
+        if num >= 500:
+            result += "D"
+            num -= 500
+        if num >= 400:
+            result += "CD"
+            num -= 400
+        while num >= 100:
+            result += "C"
+            num -= 100
+        if num >= 90:
+            result += "XC"
+            num -= 90
+        if num >= 50:
+            result += "L"
+            num -= 50
+        if num >= 40:
+            result += "XL"
+            num -= 40
+        while num >= 10:
+            result += "X"
+            num -= 10
+        if num >= 9:
+            result += "IX"
+            num -= 9
+        if num >= 5:
+            result += "V"
+            num -= 5
+        if num >= 4:
+            result += "IV"
+            num -= 4
+        while num >= 1:
+            result += "I"
+            num -= 1
+        return result    
+    #Runtime: 140 ms
+    #Memory Usage: 13.2 MB    
+    def intToRoman1(self, x: int) -> str:
         """
         :type x: int
         :rtype :str
@@ -108,11 +155,49 @@ class Solution:
                     continue
                           
         return rstr
-    
+    #Runtime: 144 ms, faster than 28.82% 
+    def intToRoman3(self, num: int) -> str:
+        stoi = {"M":1000,"D":500,"C":100,"L":50,"X":10,"V":5,"I":1}
+        strlst = ["M","D","C","L","X","V","I"]
+        rstr = ""
+
+        for idx in [0,2,4]:
+            k = num // (stoi[strlst[idx]])
+            re = (num % stoi[strlst[idx]]) // (stoi[strlst[idx + 2]])
+            rstr += k * strlst[idx]
+            if re >= 9:
+                rstr += strlst[idx + 2] + strlst[idx]
+            elif 5 <= re:
+                rstr += strlst[idx + 1] + (re - 5) * strlst[idx + 2]
+            elif re == 4:
+                rstr += strlst[idx + 2] + strlst[idx + 1]
+            else :
+                rstr += re * strlst[idx + 2]
+            num %= (stoi[strlst[idx + 2]])
+        return rstr
 if __name__=="__main__":
+    import time
     Test=Solution()
-    print(Test.intToRoman(1994) == "MCMXCIV")
-    print(Test.intToRoman(58) == "LVIII")
-    print(Test.intToRoman(9) == "IX")
-    print(Test.intToRoman(4) == "IV")
-    print(Test.intToRoman(3) == "III")
+    #rt = time.time()
+    #print(Test.intToRoman(1994) == "MCMXCIV")
+    #print(Test.intToRoman(58) == "LVIII")
+    #print(Test.intToRoman(9) == "IX")
+    #print(Test.intToRoman(4) == "IV")
+    #print(Test.intToRoman(3) == "III")
+    #print(time.time()-rt)
+    #rt2 = time.time()
+    #print(Test.intToRoman1(1994) == "MCMXCIV")
+    #print(Test.intToRoman1(58) == "LVIII")
+    #print(Test.intToRoman1(9) == "IX")
+    #print(Test.intToRoman1(4) == "IV")
+    #print(Test.intToRoman1(3) == "III")  
+    #print(time.time()-rt2)
+    rt2 = time.time()
+    #print(Test.intToRoman3(1994) == "MCMXCIV")
+    print(Test.intToRoman3(3) == "III") 
+    print(time.time()-rt2) 
+    print(Test.intToRoman3(58) == "LVIII")
+    #print(Test.intToRoman3(9) == "IX")
+    #print(Test.intToRoman3(4) == "IV")
+    #print(Test.intToRoman3(3) == "III")  
+ 
