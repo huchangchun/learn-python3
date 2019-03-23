@@ -41,7 +41,7 @@ class Solution:
                 stack.pop()
                 stack.pop()
             i += 1
-        return False if stack else True
+        return len(stack) == 0
         
 
 if __name__=="__main__":
