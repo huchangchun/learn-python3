@@ -14,7 +14,8 @@ return [0, 1].
 
 """
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    #Accepted exactly one solution
+    def twoSum(self, nums: [int], target: int) -> [int]:
         """       
         :type nums: List[int]
         :type target: int
@@ -33,12 +34,29 @@ class Solution:
             for j in range(i,len(lst)):
                 if i != j:      
                     if target == lst[i] + lst[j]:
-                        return i,j        
- 
+                        return i,j            
+    
+    def twoSum3(self, nums, target) -> [[int]]:
+        nums = sorted(nums)
+        left = 0
+        right = len(nums)-1
+        lst = []
+        while left < right:
+            if nums[left] + nums[right] == target:
+                lst.append([nums[left],nums[right]])
+                left += 1
+                right -= 1
                 
+            elif nums[left] + nums[right] < target:
+                left += 1
+            else:
+                right -= 1
+        return lst
+                             
 if __name__=="__main__":
-    num = [1,3,1,5,6,13,64]
+    num = [1,3,2,1,4,5,6,8,13,64]
     target = 19
     Test = Solution()
     i,j = Test.twoSum(num, target)
     print("i:%d,j:%d"%(i,j))
+    print(Test.twoSum3(num, 8))
