@@ -27,5 +27,8 @@ def str2float(s):
             point = point * 10
             return f + n / point
     return reduce(to_float, nums, 0.0)
+def int2str(num):
+    digitStr = ''
+    for 
 print(str2float('0'))
 print(str2float('123.456'))

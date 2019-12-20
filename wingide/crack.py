@@ -2,7 +2,7 @@
 #！复制wingide6的requestCode替换掉
 #encoding=utf8
 LicenseID='CN123-12345-12345-12345'
-RequestCode='RW617-WVBCJ-E7PWM-QAE9K'
+RequestCode='RW71W-DA624-Y94X8-9FHXT'
 import hashlib
 B16 = '0123456789ABCDEF'
 B30 = '123456789ABCDEFGHJKLMNPQRTVWXY'

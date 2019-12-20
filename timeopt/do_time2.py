@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+er#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 #time操作
 # 1)将字符串的时间 "2017-12-31 23:40:00" 转换为时间戳和时间元组
